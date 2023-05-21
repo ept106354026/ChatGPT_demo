@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+    aaa
+  <div id="tableContainer"></div>
+
+  <script>
+    // 讀取CSV檔案並生成表格
+    d3.csv("test.csv").then(function(data) {
+      data.forEach(function(d, i) {
+        // 創建表格元素
+        var table = d3.select("#tableContainer")
+          .append("table");
+
+        // 創建表格標題行
+        var thead = table.append("thead");
+        var thRow = thead.append("tr");
+        thRow.append("th").text("tool");
+        thRow.append("th").text("img");
+        thRow.append("th").text("no");
+
+        // 創建表格內容行
+        var tbody = table.append("tbody");
+        var tr = tbody.append("tr");
+        tr.append("td").text(d.tool);
+        tr.append("td").append("img")
+          .attr("src", d.img)
+          .attr("width", "100")
+          .attr("height", "100");
+        tr.append("td").text(d.no);
+      });
+    });
+  </script>
+</body>
+</html>
